@@ -8,7 +8,7 @@ namespace Doppler
 
         private const double _frequencyPrecision = 1e12;
 
-        private const double _speedPrecision = 1e7;
+        private const double _speedPrecision = 1e6;
 
         public Doppler()
         {
@@ -16,14 +16,14 @@ namespace Doppler
             frequencyTrackBar.Minimum = _minActualFrequency;
             frequencyTrackBar.Maximum = 789;
             speedTrackBar.Minimum = _minRelativeSpeed;
-            speedTrackBar.Maximum = 30;
+            speedTrackBar.Maximum = 300;
 
             Variables.ActualFrequency = _minActualFrequency * _frequencyPrecision;
             Variables.RelativeSpeed = _minRelativeSpeed * _speedPrecision;
             frequencyTrackBar.Value = _minActualFrequency;
             speedTrackBar.Value = _minRelativeSpeed;
             actualFrequencyValue.Text = $"{frequencyTrackBar.Value}e12 Hz";
-            relativeSpeedValue.Text = $"{(double)speedTrackBar.Value / 10}e8 m/sec";
+            relativeSpeedValue.Text = $"{speedTrackBar.Value / 1e2}e8 m/sec";
         }
 
         private void pictureBox_Paint(object sender, PaintEventArgs e)
@@ -64,7 +64,7 @@ namespace Doppler
         private void relativeSpeedTrackBar_ValueChanged(object sender, EventArgs e)
         {
             Variables.RelativeSpeed = speedTrackBar.Value * _speedPrecision;
-            relativeSpeedValue.Text = $"{(double)speedTrackBar.Value / 10}e8 m/sec";
+            relativeSpeedValue.Text = $"{speedTrackBar.Value / 1e2}e8 m/sec";
             pictureBox.Refresh();
         }
     }
